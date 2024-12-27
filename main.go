@@ -9,13 +9,22 @@ type ContaCorrente struct {
 	saldo         float64
 }
 
-// os elementos do struct possuem valores iniciais chamados de zero value
+func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
+	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
+	if podeSacar {
+		c.saldo -= valorDoSaque
+		return "Saque realizado com sucesso! "
+	} else {
+		return "Saldo insuficiente."
+	}
+}
 
-func main() { // Função Principal/Inicial
-	contaDoJoão := ContaCorrente{titular: "João", numeroAgencia: 589, numeroConta: 12345, saldo: 125.5} // atribuição curta (n precisa informar que e var) o codigo sem atribuição curta ficaria = var contaDoJoao ContaCorrente = ContaCorrente{}
-	fmt.Println(contaDoJoão)
-	// fmt é um pacote(?) que imprime no console
-	contaDoVinicius := ContaCorrente{"Vinícius", 589, 12345, 125.5} // atribuição curta (n precisa informar que e var)
-	fmt.Println(contaDoVinicius)                                    // fmt é um pacote(?) que imprime no console
+func main() {
+	contaDaSilva := ContaCorrente{}
+	contaDaSilva.titular = "Silva"
+	contaDaSilva.saldo = 500
 
+	fmt.Println(contaDaSilva.saldo)
+	fmt.Println(contaDaSilva.Sacar(600))
+	fmt.Println(contaDaSilva.saldo)
 }
